@@ -11,6 +11,7 @@ RUN npm run build
 FROM ubuntu as ssl
 WORKDIR /app
 
+RUN apt-get update;apt-get install openssl -y
 RUN openssl req -subj '/CN=localhost' -x509 -sha256 -newkey rsa:4096 -nodes -keyout server.key -out server.crt -days 30
 
 FROM nginx:1.22-alpine as final
